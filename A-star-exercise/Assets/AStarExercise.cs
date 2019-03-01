@@ -22,7 +22,51 @@ public class AStarExercise : MonoBehaviour {
 
         while (openSet.Count > 0)
         {
-            //IMPLEMENT A* HERE
+            //find best node in open set
+            Node bestNode = null;
+            float minCost = float.PositiveInfinity;
+            foreach (Node n in openSet)
+            {
+                if (n.cost < minCost)
+                {
+                    bestNode = n;
+                    minCost = n.cost;
+                }
+            }
+
+            if (bestNode == goal)
+            {
+                ReconstructPath(goal);
+                return;
+            }
+
+            //remove bestNode from openSet and add to closedSet
+            openSet.Remove(bestNode);
+            closedSet.Add(bestNode);
+
+            //
+            foreach (Node n in bestNode.neighbors)
+            {
+                //if n is in closedSet ignore it
+                if (closedSet.Contains(n))
+                    continue;
+
+                //calculate cost
+                float cost = CostToGetToTheNode(bestNode, n) + HeuristicCostToGoal(n);
+
+                if (!openSet.Contains(n))
+                {
+                    n.cost = cost;
+                    openSet.Add(n);
+                }
+                else
+                {
+                    if (cost < n.cost)
+                    {
+                        n.cost = cost;
+                    }
+                }
+            }
         }
 	}
 

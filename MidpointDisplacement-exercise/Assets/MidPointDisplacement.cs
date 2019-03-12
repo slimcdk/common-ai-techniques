@@ -79,11 +79,45 @@ public class MidPointDisplacement : ScriptableWizard
         oneDArray[0] = Random.Range(0, 1);
         oneDArray[side-1] = Random.Range(0, 1);
 
-
         //----------------------------------------------------
         //IMPLEMENT MID-POINT DISPLACEMENT algorithm here, on the "oneDArray" array
         //------------------------------------------------------
 
+
+        // perlin noise alike
+        for (int i = 1; i < side - 1; i++)
+        {
+            float prevPoint = oneDArray[i-1];
+            oneDArray[i] = Random.Range(prevPoint - 0.1f, prevPoint + 0.1f);
+        }
+
+
+        // midpoint
+        for(int s = side-1; s > 1; s = s/2)
+        {
+            for(seg = 0; seg < side-1; seg+=s)
+            {
+                float midpoint = (oneDArray[s] + oneDArray[s + seg+(seg/2)]) / 2
+                oneDArray[s] = Random.Range(midpoint*-1f, midpoint*1f) * s;
+            }
+        }
+
+        /*
+        int subdivision = 5;
+        float start = oneDArray[0];
+        float end = oneDArray[side-1];
+        int midindex = int(side / 2) + 1;
+
+        for (int i = 1; i < side - 1; i++)
+        {   
+            float midpoint = oneDArray[midindex];
+            oneDArray[midindex] = Random.Range()
+        }
+
+        float CalcMidpoint(float start, float end,) {
+            return (start + end) / 2 + Random.Range(0f, 1f);
+        }
+        */
 
         //copy the 1D array on all the y coordinates of the heightmap
         for (int y = 0; y < t.terrainData.heightmapHeight; y++)
@@ -103,6 +137,8 @@ public class MidPointDisplacement : ScriptableWizard
         //finally we pass the heightmap (hts) to the terrain to generate the new terrain
         t.terrainData.SetHeights(0, 0, hts);
     }
+
+
 
     float[,] NormalizeHeightmap(float[,] map, float minValue, float maxValue)
     {

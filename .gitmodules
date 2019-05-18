@@ -1,0 +1,3 @@
+[submodule "course-project/Assets/unity-wireframe"]
+	path = course-project/Assets/unity-wireframe
+	url = git@github.com:Chaser324/unity-wireframe.git

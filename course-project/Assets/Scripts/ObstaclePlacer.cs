@@ -5,21 +5,42 @@ using UnityEngine;
 public class ObstaclePlacer : MonoBehaviour {
 
 	public GameObject groundParent, obstacleParent;
+	public Boundary groundPlane;
 
 	public float thresholdDistance = 10;
 	public int cubes = 10, spheres = 10;
 	public List<GameObject> obstacles;
+
+	public QuadTree quadTree;
 
 	private float groundSize;
 
 	void Awake () {
 		groundParent = GameObject.FindGameObjectWithTag("Ground");
 		obstacleParent = GameObject.FindGameObjectWithTag("Obstacle");
+
+		groundPlane = new Boundary(
+			-(groundParent.transform.position.x + groundParent.transform.localScale.x*5), 
+			-(groundParent.transform.position.z + groundParent.transform.localScale.z*5),  
+			groundParent.transform.position.x + groundParent.transform.localScale.x*5,
+			(groundParent.transform.position.z + groundParent.transform.localScale.z*5)
+		);
+		groundPlane.Print();
+
 		groundSize = groundParent.transform.localScale.x * 10;
 
-		PopulateCubes();
-		PopulateSpheres();
+		Debug.Log(groundSize);
+
+		SetupQuadTree();
+		//PopulateCubes();
+		//PopulateSpheres();
 	}
+
+
+	void SetupQuadTree(){
+		quadTree = new QuadTree(groundPlane, 3);
+	}
+
 
 	void PopulateCubes()
 	{
@@ -40,9 +61,9 @@ public class ObstaclePlacer : MonoBehaviour {
 
 			// Set random position within ground space
 			cube.transform.position = new Vector3 (
-				Random.Range(-groundSize*0.45f, groundSize*0.45f),
+				Random.Range(groundPlane.east*0.45f, groundPlane.west*0.45f),
 				cube.transform.localScale.y / 2,
-				Random.Range(-groundSize*0.45f, groundSize*0.45f)
+				Random.Range(groundPlane.north*0.45f, groundPlane.south*0.45f)
 			);
 
 			// Verify of position is valid for placement

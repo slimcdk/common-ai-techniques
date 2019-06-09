@@ -8,6 +8,7 @@ TagManager:
   - Obstacle:Cube
   - Obstacle
   - Obstacle:Sphere
+  - NodeManager
   layers:
   - Default
   - TransparentFX

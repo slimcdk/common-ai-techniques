@@ -373,6 +373,47 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 280518341}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &685434799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685434800}
+  - component: {fileID: 685434801}
+  m_Layer: 0
+  m_Name: NodeManager
+  m_TagString: NodeManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &685434800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 685434799}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -264.90408, y: -227.25348, z: -45.4133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1491603283}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &685434801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 685434799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26133e6a46a504795932b0a9c386b441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 0}
 --- !u!1 &823901472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,9 +5422,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundParent: {fileID: 0}
   obstacleParent: {fileID: 0}
-  thresholdDistance: 20
+  thresholdDistance: 10
   cubes: 10
-  spheres: 10
+  spheres: 0
   obstacles: []
 --- !u!4 &1491603283
 Transform:
@@ -5397,6 +5438,7 @@ Transform:
   m_Children:
   - {fileID: 874688144}
   - {fileID: 838139396}
+  - {fileID: 685434800}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
